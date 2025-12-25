@@ -24,7 +24,8 @@ body {
     color: var(--text-main);
     font-family: var(--font-family);
     height: 100vh;
-    overflow: hidden; /* Prevent body scroll, handle in containers */
+    overflow: hidden;
+    /* Prevent body scroll, handle in containers */
 }
 
 /* App Container */
@@ -73,7 +74,7 @@ body {
     display: flex;
     align-items: center;
     gap: 15px;
-    box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
 }
 
 .progress-ring {
@@ -93,6 +94,7 @@ body {
     font-weight: 600;
     font-size: 1.1rem;
 }
+
 .summary-text small {
     color: var(--text-muted);
 }
@@ -101,7 +103,8 @@ body {
 .habit-list-container {
     flex: 1;
     overflow-y: auto;
-    padding: 10px 20px 100px; /* Bottom padding for FAB */
+    padding: 10px 20px 100px;
+    /* Bottom padding for FAB */
 }
 
 .habit-list {
@@ -152,6 +155,12 @@ body {
     color: var(--text-muted);
 }
 
+.habit-actions {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
 /* Check Button */
 .check-btn {
     width: 32px;
@@ -164,6 +173,7 @@ body {
     display: flex;
     align-items: center;
     justify-content: center;
+    flex-shrink: 0;
 }
 
 .check-btn::after {
@@ -205,21 +215,23 @@ body {
     transform: scale(0.9);
 }
 
-/* Delete Action (Swipe or specialized button? For simplicty: long press menu logic could be added) 
-   Adding a small delete button for V1 MVP convenience 
-*/
+/* Delete Action */
 .delete-btn {
-    margin-left: 10px;
     background: transparent;
     border: none;
     color: var(--danger);
-    opacity: 0;
-    pointer-events: none;
+    cursor: pointer;
+    padding: 5px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0.7;
     transition: opacity 0.2s;
 }
-.habit-item:hover .delete-btn { /* Only works on desktop, mobile needs swipe logic eventually */
-    opacity: 1; 
-    pointer-events: auto;
+
+.delete-btn:hover,
+.delete-btn:active {
+    opacity: 1;
 }
 
 
@@ -230,7 +242,7 @@ body {
     left: 0;
     width: 100%;
     height: 100%;
-    background: rgba(0,0,0,0.8);
+    background: rgba(0, 0, 0, 0.8);
     display: flex;
     align-items: center;
     justify-content: center;
@@ -283,7 +295,8 @@ body {
     margin-top: 10px;
 }
 
-.btn-cancel, .btn-save {
+.btn-cancel,
+.btn-save {
     padding: 10px 20px;
     border-radius: 8px;
     font-weight: 500;
@@ -298,6 +311,6 @@ body {
 
 .btn-save {
     background: var(--primary);
-    color: #000; /* Contrast on primary */
+    color: #000;
+    /* Contrast on primary */
 }
-
