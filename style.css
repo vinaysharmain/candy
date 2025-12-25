@@ -1,0 +1,303 @@
+:root {
+    --bg-color: #121212;
+    --card-bg: #1E1E1E;
+    --primary: #BB86FC;
+    --primary-variant: #3700B3;
+    --secondary: #03DAC6;
+    --text-main: #FFFFFF;
+    --text-muted: #B0B0B0;
+    --danger: #CF6679;
+    --border-radius: 16px;
+    --font-family: 'Outfit', sans-serif;
+    --header-height: 60px;
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    -webkit-tap-highlight-color: transparent;
+}
+
+body {
+    background-color: var(--bg-color);
+    color: var(--text-main);
+    font-family: var(--font-family);
+    height: 100vh;
+    overflow: hidden; /* Prevent body scroll, handle in containers */
+}
+
+/* App Container */
+.app-container {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    max-width: 600px;
+    margin: 0 auto;
+    background-color: var(--bg-color);
+    position: relative;
+}
+
+/* Header */
+.app-header {
+    height: var(--header-height);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 20px;
+    background: rgba(18, 18, 18, 0.95);
+    backdrop-filter: blur(10px);
+    z-index: 10;
+}
+
+.logo {
+    font-size: 1.5rem;
+    font-weight: 700;
+    background: linear-gradient(45deg, var(--primary), var(--secondary));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.date-display {
+    color: var(--text-muted);
+    font-size: 0.9rem;
+    font-weight: 500;
+}
+
+/* Summary Card */
+.summary-card {
+    background: linear-gradient(135deg, #2C2C2C, #1F1F1F);
+    margin: 10px 20px;
+    padding: 20px;
+    border-radius: var(--border-radius);
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+}
+
+.progress-ring {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    border: 3px solid var(--primary);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 700;
+    font-size: 0.9rem;
+    color: var(--primary);
+}
+
+.summary-text p {
+    font-weight: 600;
+    font-size: 1.1rem;
+}
+.summary-text small {
+    color: var(--text-muted);
+}
+
+/* Habit List */
+.habit-list-container {
+    flex: 1;
+    overflow-y: auto;
+    padding: 10px 20px 100px; /* Bottom padding for FAB */
+}
+
+.habit-list {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.habit-item {
+    background-color: var(--card-bg);
+    padding: 16px;
+    border-radius: var(--border-radius);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    transition: transform 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    border: 1px solid transparent;
+}
+
+.habit-item:active {
+    transform: scale(0.98);
+}
+
+.habit-item.completed {
+    border-color: rgba(3, 218, 198, 0.3);
+    background-color: rgba(3, 218, 198, 0.05);
+}
+
+.habit-info {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+
+.habit-name {
+    font-size: 1rem;
+    font-weight: 500;
+}
+
+.habit-item.completed .habit-name {
+    text-decoration: line-through;
+    color: var(--text-muted);
+}
+
+.habit-streak {
+    font-size: 0.75rem;
+    color: var(--text-muted);
+}
+
+/* Check Button */
+.check-btn {
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    border: 2px solid var(--text-muted);
+    background: transparent;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.check-btn::after {
+    content: '✓';
+    color: transparent;
+    font-weight: 800;
+    font-size: 1.1rem;
+}
+
+.habit-item.completed .check-btn {
+    background-color: var(--secondary);
+    border-color: var(--secondary);
+}
+
+.habit-item.completed .check-btn::after {
+    color: #000;
+}
+
+/* FAB */
+.fab {
+    position: absolute;
+    bottom: 30px;
+    right: 20px;
+    width: 56px;
+    height: 56px;
+    border-radius: 50%;
+    background: var(--primary);
+    border: none;
+    box-shadow: 0 4px 12px rgba(187, 134, 252, 0.4);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    z-index: 100;
+    transition: transform 0.2s;
+}
+
+.fab:active {
+    transform: scale(0.9);
+}
+
+/* Delete Action (Swipe or specialized button? For simplicty: long press menu logic could be added) 
+   Adding a small delete button for V1 MVP convenience 
+*/
+.delete-btn {
+    margin-left: 10px;
+    background: transparent;
+    border: none;
+    color: var(--danger);
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.2s;
+}
+.habit-item:hover .delete-btn { /* Only works on desktop, mobile needs swipe logic eventually */
+    opacity: 1; 
+    pointer-events: auto;
+}
+
+
+/* Modal */
+.modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0,0,0,0.8);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.3s;
+    z-index: 1000;
+}
+
+.modal-overlay.active {
+    opacity: 1;
+    visibility: visible;
+}
+
+.modal-content {
+    background: var(--card-bg);
+    padding: 24px;
+    width: 85%;
+    max-width: 400px;
+    border-radius: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.modal-content h2 {
+    font-size: 1.25rem;
+    margin-bottom: 5px;
+}
+
+.modal-content input {
+    width: 100%;
+    padding: 12px;
+    background: #121212;
+    border: 1px solid #333;
+    border-radius: 8px;
+    color: white;
+    font-size: 1rem;
+    outline: none;
+}
+
+.modal-content input:focus {
+    border-color: var(--primary);
+}
+
+.modal-actions {
+    display: flex;
+    justify-content: flex-end;
+    gap: 10px;
+    margin-top: 10px;
+}
+
+.btn-cancel, .btn-save {
+    padding: 10px 20px;
+    border-radius: 8px;
+    font-weight: 500;
+    border: none;
+    cursor: pointer;
+}
+
+.btn-cancel {
+    background: transparent;
+    color: var(--text-muted);
+}
+
+.btn-save {
+    background: var(--primary);
+    color: #000; /* Contrast on primary */
+}
+

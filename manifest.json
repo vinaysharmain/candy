@@ -1,0 +1,22 @@
+{
+    "name": "Candy Habit Tracker",
+    "short_name": "Candy",
+    "description": "Your personal offline habit tracker.",
+    "start_url": "./index.html",
+    "display": "standalone",
+    "background_color": "#121212",
+    "theme_color": "#121212",
+    "orientation": "portrait",
+    "icons": [
+        {
+            "src": "https://via.placeholder.com/192x192.png?text=Candy",
+            "sizes": "192x192",
+            "type": "image/png"
+        },
+        {
+            "src": "https://via.placeholder.com/512x512.png?text=Candy",
+            "sizes": "512x512",
+            "type": "image/png"
+        }
+    ]
+}
